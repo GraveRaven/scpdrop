@@ -14,22 +14,22 @@ It's purpose is to allow easy transfering of files via SCP without having to wor
 
 Download the package
 ```
-$ go get github.com/graveraven/scpDrop
+$ go get github.com/graveraven/scpdrop
 ```
 Make sure $PATH includes the $GOBIN path or move scpDrop from $GOBIN to a location within your $PATH.
-Copy example_scpdrop.config to either /etc/scpDrop/scpDrop.conf or $HOME/.config/scpDrop/scpDrop.conf and edit it to your liking.
+Copy example_scpdrop.config to either /etc/scpdrop/scpdrop.conf or $HOME/.scpdrop.conf and edit it to your liking.
 
 The server needs an private key to identify itself.
 Generate one using ssh-keygen. It's recommended to put the private key in the same folder as the config and make sure it's not world readable.  
 The tool does not support passphrases.
 ```
-$ ssh-keygen -t rsa -b 4096 -C scpDrop -f /etc/scpDrop/id_rsa
+$ ssh-keygen -t rsa -b 4096 -C scpDrop -f /etc/scpdrop/id_rsa
 ```
 
 ### Usage
 ```
-$ scpDrop -h
-Usage: scpDrop server|user
+$ scpdrop -h
+Usage: scpdrop server|user
   server
         Start the server
   user
@@ -108,20 +108,20 @@ Usage of Server:
 #### Config file
 The config file will be automatically identified from three places. In order they are
 * Current directory
-* ~/.config/scpDrop/scpDrop.conf
-* /etc/scpDrop/scpDrop.conf
+* ~/.config/scpdrop/scpdrop.conf
+* /etc/scpdrop/scpdrop.conf
 
 The config settings are newline separated and the values are separated from the config name by one or more spaces or tabs. Hash signs can be used to comment out a line. Note that a hash sign in any other place than at the start of a line will be treated as part of the config file text.
 ###### Example config
 ```
 Listen :2022
-PrivateKey /scpDrop/id_rsa
-SharedDir /scpDrop/shared
-UsersDir /scpDrop/users
-KeysDir /scpDrop/keys
+PrivateKey /scpdrop/id_rsa
+SharedDir /scpdrop/shared
+UsersDir /scpdrop/users
+KeysDir /scpdrop/keys
 LogLevel info
-LogFile /scpDrop/scpDrop.log
-PasswdFile /scpDrop/passwd
+LogFile /scpdrop/scpdrop.log
+PasswdFile /scpdrop/passwd
 #Cmd
 ScpPath /usr/bin/scp
 ```

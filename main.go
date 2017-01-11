@@ -155,9 +155,9 @@ func getConfig(path string) (c Config, err error) {
 	usr, _ := user.Current()
 	homeDir := usr.HomeDir
 	defaultLocations := []string{
-		"scpDrop.conf",
-		homeDir + "/.config/scpDrop/scpDrop.conf",
-		"/etc/scpDrop/scpDrop.conf",
+		"scpdrop.conf",
+		homeDir + "/.config/scpdrop/scpdrop.conf",
+		"/etc/scpdrop/scpdrop.conf",
 	}
 
 	confPath := path
