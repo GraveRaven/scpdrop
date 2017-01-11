@@ -232,6 +232,7 @@ func addSepSuffix(s string) string {
 	return s
 }
 
+// constants for toByte conversions
 const (
 	BYTE     = 1.0
 	KILOBYTE = 1024 * BYTE

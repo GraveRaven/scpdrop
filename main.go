@@ -35,7 +35,7 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-var scpDropVersion string = "1.0"
+var scpDropVersion = "1.0"
 
 // Config is the struct used to hold config information.
 type Config struct {
@@ -77,7 +77,7 @@ func parseConfig(content []byte) (c Config, err error) {
 
 	lineNr := 0
 	for scanner.Scan() {
-		lineNr += 1
+		lineNr++
 		line := scanner.Text()
 		line = strings.Trim(line, " \t")
 

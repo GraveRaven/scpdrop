@@ -9,24 +9,24 @@ import (
 	_ "golang.org/x/crypto/ssh"
 )
 
-type test_sshConn struct {
+type testSSHConn struct {
 	user          string
 	sessionID     []byte
 	clientVersion []byte
 	serverVersion []byte
 }
 
-func test_dup(src []byte) []byte {
+func testDup(src []byte) []byte {
 	dst := make([]byte, len(src))
 	copy(dst, src)
 	return dst
 }
 
-func (c *test_sshConn) User() string {
+func (c *testSSHConn) User() string {
 	return c.user
 }
 
-func (c *test_sshConn) RemoteAddr() net.Addr {
+func (c *testSSHConn) RemoteAddr() net.Addr {
 	ip := new(net.TCPAddr)
 	ip.IP = net.ParseIP("192.168.10.1")
 	ip.Port = 22
@@ -35,24 +35,24 @@ func (c *test_sshConn) RemoteAddr() net.Addr {
 
 }
 
-func (c *test_sshConn) Close() error {
+func (c *testSSHConn) Close() error {
 	return nil
 }
 
-func (c *test_sshConn) LocalAddr() net.Addr {
+func (c *testSSHConn) LocalAddr() net.Addr {
 	return nil
 }
 
-func (c *test_sshConn) SessionID() []byte {
-	return test_dup(c.sessionID)
+func (c *testSSHConn) SessionID() []byte {
+	return testDup(c.sessionID)
 }
 
-func (c *test_sshConn) ClientVersion() []byte {
-	return test_dup(c.clientVersion)
+func (c *testSSHConn) ClientVersion() []byte {
+	return testDup(c.clientVersion)
 }
 
-func (c *test_sshConn) ServerVersion() []byte {
-	return test_dup(c.serverVersion)
+func (c *testSSHConn) ServerVersion() []byte {
+	return testDup(c.serverVersion)
 }
 
 func TestValidatePass(t *testing.T) {
@@ -75,7 +75,7 @@ func TestValidatePass(t *testing.T) {
 	}
 }
 
-func test_buildPasswdFile(passwdFile string, t *testing.T) {
+func testBuildPasswdFile(passwdFile string, t *testing.T) {
 	var users []byte
 	users = append(users, []byte("testuser:$6$mpIfdJs54D$99fb779f928b42e7f4f7f0ba96853ea13ee3c4575ea7e852938cdd45705a658ac59ad76f7848ed3416d6e60fbb93a889f04ccbf3ff517280419963f75483d822:w:/:0::t\n")...)
 	users = append(users, []byte("failuser:$6$FDVvxUdS7n$45070520fa43d9e95b83ade869442b7a5fed21f03af0628004dde3747c527f7002a847afbfa5d678a9099654af6d6212c5dc7c271388d2c46f7c76cdb2b32335:w:/:0::t\n")...)
@@ -87,14 +87,14 @@ func test_buildPasswdFile(passwdFile string, t *testing.T) {
 }
 
 func TestValidateUser(t *testing.T) {
-	var correctPassword []byte = []byte("myPassword123!")
+	var correctPassword = []byte("myPassword123!")
 	initLog("-", "none")
 
 	//Only works for *nix
 	passwdFile := "/tmp/scpdropPasswdTest"
-	test_buildPasswdFile(passwdFile, t)
+	testBuildPasswdFile(passwdFile, t)
 
-	var c test_sshConn
+	var c testSSHConn
 	c.user = "testuser"
 
 	helper := validationHelper{PasswdFile: passwdFile}
