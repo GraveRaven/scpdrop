@@ -1,6 +1,6 @@
 ## scpDrop
 scpDrop is an SCP only SSH server.  
-It's purpose is to allow easy transfering of files via SCP without having to worry about users being able to run commands. By default only a single interaction with the service is allowed before a user account is removed. It currently requires scp to be present on the host system but this will in all likelihood change in the future.
+It's purpose is to allow easy transferring of files via SCP without having to worry about users being able to run commands. By default only a single interaction with the service is allowed before a user account is removed. It currently requires scp to be present on the host system but this will in all likelihood change in the future.
 
 ### Features
 * Password and identity file authentication
